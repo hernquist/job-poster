@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { addJob, getJobs, getJob } from '../database';
+import { addJob, getJobs, getJob, getBids } from '../database';
 
 const router = express.Router();
 
@@ -27,6 +27,18 @@ router.get('/:id', async (req: Request, res: Response) => {
       return
     } 
     res.send(job[0]);
+  })
+});
+
+// API route to get bids by a job id
+router.get('/:id/bids', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  getBids(parseInt(id), (err: { message: any; }, bids: any) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.send(bids);
   })
 });
 
