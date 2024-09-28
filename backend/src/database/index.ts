@@ -5,9 +5,11 @@ const db = new sqlite3.Database(':memory:');
 
 db.serialize(() => {
   db.run('CREATE TABLE users (id INT, name TEXT)');
-  db.run('INSERT INTO users (id, name) VALUES (1, "John Doe")');
+  db.run('INSERT INTO users (id, name) VALUES (1, "John Doe"), (2, "Jane Doe")');
   db.run('CREATE TABLE jobs (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, requirements TEXT, name TEXT, email TEXT, phone TEXT, expiration TEXT)');
   db.run('INSERT INTO jobs (description, requirements, name, email, phone, expiration) VALUES ("Job description", "Job requirements", "John Poster", "j.poster@mail.com", "123456789", "2024-10-1 20:14:09.123")');
+  db.run('CREATE TABLE bids (id INTEGER PRIMARY KEY AUTOINCREMENT, job_id INT, user_id INT, amount INT, FOREIGN KEY(job_id) REFERENCES jobs(id))');
+  db.run('INSERT INTO bids (job_id, user_id, amount) VALUES (1, 1, 100), (1, 1, 200), (1, 2, 150)');
 })
 
 export function getUsers(callback: any) {
