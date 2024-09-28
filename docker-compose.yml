@@ -3,6 +3,16 @@ services:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
+    command: npm run watch
+    develop:
+      watch:
+        - action: sync
+          path: ./backend/src
+          target: /src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./backend/src
     ports:
       - "3001:3001"
   frontend:
@@ -13,3 +23,4 @@ services:
       - "3000:3000"
       - "8080:8080"
       - "4200:4200"
+
