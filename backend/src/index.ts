@@ -1,28 +1,26 @@
 import express, { Request, Response } from 'express';
-import sqlite3 from 'sqlite3';
+import usersRoutes from './routes/users';
+import { addUser, deleteUser, getUsers } from './database';
 
 const app = express();
 app.use(express.json())
 
 const port = 3001;
 
-// Create and setup the SQLite database
-const db = new sqlite3.Database(':memory:');
+// routing
+app.use('/test', usersRoutes);
 
-db.serialize(() => {
-  db.run('CREATE TABLE users (id INT, name TEXT)');
-  db.run('INSERT INTO users (id, name) VALUES (1, "John Doe")');
-});
+
 
 // API route to get users
-app.get('/users', (req: Request, res: Response) => {
-  db.all('SELECT * FROM users', (err, rows) => {
+app.get('/users', async (req: Request, res: Response) => {
+  getUsers((err: { message: any; }, rows: any) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
     }
-    res.json({ data: rows });
-  });
+    res.send(rows);
+  })
 });
 
 // API route to add a user
@@ -32,7 +30,7 @@ app.post('/users', (req: Request, res: Response) => {
     res.status(400).json({ error: 'Please provide an id and name' });
     return;
   }
-  db.run('INSERT INTO users (id, name) VALUES (?, ?)', [id, name], (err: Error | null) => {
+  addUser(id, name, (err: { message: any; }) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
@@ -44,13 +42,9 @@ app.post('/users', (req: Request, res: Response) => {
 // API route to delete a user
 app.delete('/users/:id', (req: Request, res: Response) => {
   const { id } = req.params;
-  db.run('DELETE FROM users WHERE id = ?', [id], function(err: Error | null) {
+  deleteUser (parseInt(id), (err: { message: any; }) => {
     if (err) {
       res.status(500).json({ error: err.message });
-      return;
-    }
-    if (this.changes === 0) {
-      res.status(404).json({ error: 'User not found' });
       return;
     }
     res.status(200).json({ message: 'User deleted' });

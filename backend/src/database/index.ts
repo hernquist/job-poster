@@ -1,0 +1,25 @@
+import sqlite3 from 'sqlite3';
+
+// Create and setup the SQLite database
+const db = new sqlite3.Database(':memory:');
+
+db.serialize(() => {
+  db.run('CREATE TABLE users (id INT, name TEXT)');
+  db.run('INSERT INTO users (id, name) VALUES (1, "John Doe")');
+})
+
+export function getUsers(callback: any) {
+    const query = 'SELECT * FROM users';
+    db.all(query, [], callback)
+}
+
+export function deleteUser(id: number, callback: any) {
+    const query = 'DELETE FROM users WHERE id = ?';
+    db.run(query, [id], callback)
+}
+
+export function addUser(id: number, name: string, callback: any) {
+    const query = 'INSERT INTO users (id, name) VALUES (?, ?)';
+    db.run(query, [id, name], callback)
+}
+
