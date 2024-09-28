@@ -33,7 +33,7 @@ router.post('', (req: Request, res: Response) => {
 // API route to delete a user
 router.delete('/:id', (req: Request, res: Response) => {
   const { id } = req.params;
-  deleteUser (parseInt(id), (err: { message: any; }) => {
+  deleteUser(parseInt(id), (err: { message: any; }) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
