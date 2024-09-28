@@ -32,13 +32,13 @@ router.get('/:id', async (req: Request, res: Response) => {
 
 // API route to add a job
 router.post('', (req: Request, res: Response) => {
-  const { description, requirements, name, email, phone } = req.body;
+  const { description, requirements, name, email, phone, expiration } = req.body;
   if (name === undefined) {
     res.status(400).json({ error: 'Please provide a name' });
     return;
   }
 
-  addJob({ description, requirements, name, email, phone }, (err: { message: any; }) => {
+  addJob({ description, requirements, name, email, phone, expiration }, (err: { message: any; }) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
