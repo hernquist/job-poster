@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
-import { getJobs } from '../database';
+import { addJob, getJobs } from '../database';
 
 const router = express.Router();
 
-// API route to get users
+// API route to get jobs
 router.get('', async (req: Request, res: Response) => {
   getJobs((err: { message: any; }, rows: any) => {
     if (err) {
@@ -14,21 +14,21 @@ router.get('', async (req: Request, res: Response) => {
   })
 });
 
-// API route to add a user
-// router.post('', (req: Request, res: Response) => {
-//   const { id, name } = req.body;
-//   if (id === undefined || name === undefined) {
-//     res.status(400).json({ error: 'Please provide an id and name' });
-//     return;
-//   }
-//   addUser(id, name, (err: { message: any; }) => {
-//     if (err) {
-//       res.status(500).json({ error: err.message });
-//       return;
-//     }
-//     res.status(201).json({ message: 'User added' });
-//   });
-// });
+// API route to add a job
+router.post('', (req: Request, res: Response) => {
+  const { description, requirements, name, email, phone } = req.body;
+  if (name === undefined) {
+    res.status(400).json({ error: 'Please provide a name' });
+    return;
+  }
+  addJob({ description, requirements, name, email, phone }, (err: { message: any; }) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.status(201).json({ message: 'Job added' });
+  });
+});
 
 // // API route to delete a user
 // router.delete('/:id', (req: Request, res: Response) => {
