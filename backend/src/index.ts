@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import sqlite3 from 'sqlite3';
 
 const app = express();
+app.use(express.json())
+
 const port = 3001;
 
 // Create and setup the SQLite database
