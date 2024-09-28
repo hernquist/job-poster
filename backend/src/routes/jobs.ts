@@ -45,7 +45,7 @@ router.get('/:id/bids', async (req: Request, res: Response) => {
 // API route to add a job
 router.post('', (req: Request, res: Response) => {
   const { description, requirements, name, email, phone, expiration } = req.body;
-  if (name === undefined) {
+  if (typeof name === "undefined") {
     res.status(400).json({ error: 'Please provide a name' });
     return;
   }
