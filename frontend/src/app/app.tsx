@@ -1,13 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.less';
+import NavBar from "../components/NavBar";
+import Router from "./Router";
 
-import NxWelcome from './nx-welcome';
-
-export function App() {
+function App() {
   return (
-    <div>
-      <NxWelcome title="frontend" />
-    </div>
+    <>
+      <NavBar/>
+      <Router />
+    </>
   );
 }
 
