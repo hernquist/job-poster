@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "dev": "npm run build && npm run start",
+    "watch": "nodemon --watch src -ext ts --exec \"npm run dev\" --signal SIGTERM",
+    "start": "node dist/index.js"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
