@@ -30,3 +30,7 @@ export function getJobs(callback: any) {
     db.all(query, [], callback)
 }
 
+export function addJob({ description, requirements, name, email, phone }: { description: string, requirements: string, name: string, email: string, phone: string }, callback: any) {
+    const query = 'INSERT INTO jobs (description, requirements, name, email, phone) VALUES (?, ?, ?, ?, ?)';
+    db.run(query, [description, requirements, name, email, phone], callback)
+}
