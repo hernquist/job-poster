@@ -14,10 +14,10 @@ RUN npm install -g typescript && npm install
 COPY . .
 
 # Build the TypeScript code
-RUN tsc
+RUN npm run build
 
 # Expose application port
 EXPOSE 3001
 
 # Command to run the application
-CMD ["node", "dist/index.js"]
+CMD ["npm", "start"]
