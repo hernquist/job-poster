@@ -1,16 +1,32 @@
 import express, { Request, Response } from 'express';
-import { addJob, getJobs } from '../database';
+import { addJob, getJobs, getJob } from '../database';
 
 const router = express.Router();
 
 // API route to get jobs
 router.get('', async (req: Request, res: Response) => {
-  getJobs((err: { message: any; }, rows: any) => {
+  getJobs((err: { message: any; }, jobs: any) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
     }
-    res.send(rows);
+    res.send(jobs);
+  })
+});
+
+// API route to get job by id
+router.get('/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  getJob(parseInt(id), (err: { message: any; }, job: any) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    if (job.length === 0) {
+      res.status(404).json({ error: `Job ${id} not found` });
+      return
+    } 
+    res.send(job[0]);
   })
 });
 
@@ -21,6 +37,7 @@ router.post('', (req: Request, res: Response) => {
     res.status(400).json({ error: 'Please provide a name' });
     return;
   }
+
   addJob({ description, requirements, name, email, phone }, (err: { message: any; }) => {
     if (err) {
       res.status(500).json({ error: err.message });
@@ -29,17 +46,5 @@ router.post('', (req: Request, res: Response) => {
     res.status(201).json({ message: 'Job added' });
   });
 });
-
-// // API route to delete a user
-// router.delete('/:id', (req: Request, res: Response) => {
-//   const { id } = req.params;
-//   deleteUser (parseInt(id), (err: { message: any; }) => {
-//     if (err) {
-//       res.status(500).json({ error: err.message });
-//       return;
-//     }
-//     res.status(200).json({ message: 'User deleted' });
-//   });
-// });
 
 export default router;
