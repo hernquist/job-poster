@@ -16,16 +16,19 @@ function getBidsFromJobs(jobs: any[]) {
 function applyBidsToJobs (jobs: any[]) {
     const getBids = getBidsFromJobs(jobs);
 
-    return jobs?.filter((job: any, index: number) => jobs.findIndex( (j: any) => j.jobId === job.jobId ) === index).map((job: any) => {
-        return {
-            id: job.jobId,
-            title: job.title,
-            requirements: job.requirements,
-            name: job.name,
-            email: job.email,
-            bids: getBids[job.jobId]
-        }
-    });
+    return jobs?.filter((job: any, index: number) => jobs.findIndex( (j: any) => j.jobId === job.jobId ) === index)
+        .map((job: any) => {
+            return {
+                id: job.jobId,
+                title: job.title,
+                description: job.description,
+                requirements: job.requirements,
+                name: job.name,
+                email: job.email,
+                phone: job.phone,
+                bids: getBids[job.jobId]
+            }
+        });
 };
 
 export { applyBidsToJobs };
