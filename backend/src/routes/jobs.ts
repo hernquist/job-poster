@@ -55,7 +55,7 @@ router.post('', (req: Request, res: Response) => {
       res.status(500).json({ error: err.message });
       return;
     }
-    res.status(201).json({ message: 'Job added' });
+    res.status(200).json({ message: 'Job added' });
   });
 });
 
