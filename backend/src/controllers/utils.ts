@@ -26,6 +26,8 @@ function applyBidsToJobs (jobs: any[]) {
                 name: job.name,
                 email: job.email,
                 phone: job.phone,
+                expiration: job.expiration,
+                timeCreated: job.timeCreated,
                 bids: getBids[job.jobId]
             }
         });

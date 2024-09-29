@@ -31,7 +31,7 @@ export function addUser(id: number, name: string, callback: any) {
 export function getJobs(callback: any) {
     const query = `
     SELECT jobs.id as 
-    jobId, title, description, requirements, name, email, phone, 
+    jobId, title, description, requirements, name, email, phone, timeCreated, expiration,
     bids.amount as bidsAmount, bids.user_id as bidsUserId, bids.id as bidsId 
     FROM jobs LEFT JOIN bids 
     ON jobs.id = bids.job_id`;
