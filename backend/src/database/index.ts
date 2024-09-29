@@ -9,8 +9,8 @@ db.serialize(() => {
   db.run('INSERT INTO users (id, name) ' + seededData.users);
   db.run('CREATE TABLE jobs (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, requirements TEXT, name TEXT, email TEXT, phone TEXT, expiration TEXT, timeCreated TEXT)');
   db.run('INSERT INTO jobs (title, description, requirements, name, email, phone, expiration, timeCreated) ' + seededData.jobs);
-  db.run('CREATE TABLE bids (id INTEGER PRIMARY KEY AUTOINCREMENT, job_id INT, user_id INT, amount INT, FOREIGN KEY(job_id) REFERENCES jobs(id))');
-  db.run('INSERT INTO bids (job_id, user_id, amount) ' + seededData.bids);
+  db.run('CREATE TABLE bids (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INT, amount INT, job_id INTEGER, FOREIGN KEY(job_id) REFERENCES jobs(id))');
+  db.run('INSERT INTO bids (user_id, amount, job_id) ' + seededData.bids);
 })
 
 export function getUsers(callback: any) {
@@ -29,7 +29,12 @@ export function addUser(id: number, name: string, callback: any) {
 }
 
 export function getJobs(callback: any) {
-    const query = 'SELECT * FROM jobs';
+    const query = `
+    SELECT jobs.id as 
+    jobId, title, description, requirements, name, email, phone, 
+    bids.amount as bidsAmount, bids.user_id as bidsUserId, bids.id as bidsId 
+    FROM jobs LEFT JOIN bids 
+    ON jobs.id = bids.job_id`;
     db.all(query, [], callback)
 }
 
@@ -50,6 +55,6 @@ export function getBidsByJobId(jobId: number, callback: any) {
 
 export function addBid(jobId: number, amount: number, callback: any) {
     const userId = 1; // Assume the user is always 1 for now
-    const query = 'INSERT INTO bids (job_id, user_id, amount) VALUES (?, ?, ?)';
-    db.run(query, [jobId, userId, amount], callback)
+    const query = 'INSERT INTO bids (user_id, amount, job_id) VALUES (?, ?, ?)';
+    db.run(query, [userId, amount, jobId], callback)
 }
