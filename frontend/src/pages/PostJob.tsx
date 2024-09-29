@@ -26,7 +26,6 @@ function PostJob() {
             },
             body: JSON.stringify({ 
                 title, description, requirements, name, email, phone, expiration
-                // description, requirements, name, email, phone, expiration
             }),
         });
       
