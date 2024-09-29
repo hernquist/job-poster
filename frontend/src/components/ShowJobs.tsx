@@ -1,4 +1,6 @@
 import useSWR from "swr";
+import JobList from "./JobList";
+import { sortMostRecent } from "./utils";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -16,8 +18,8 @@ export function ShowJobs() {
 
   return (
     <div>
-      {jobs?.length}
-      {/* {jobs.map((job: any) => <div>{job.description}</div>)} */}
+      <h5>5 most recent jobs</h5>
+      <JobList jobs={jobs.sort(sortMostRecent).slice(0,5)} />
     </div>
   );
 }
