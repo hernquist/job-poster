@@ -90,6 +90,20 @@ The application will be running on `http://localhost:3001`.
 
 `curl -X DELETE http://localhost:3001/users/2`
 
+## New Endpoints
+
+### Get Bids By Job
+
+`curl http://localhost:3001/jobs/1/bids`
+
+### Add Bid To Job
+
+`curl -X POST -H "Content-Type: application/json" -d '{"jobId": 1, "amount": "786"}' http://localhost:3001/bids`
+
+(Add job that would not work because the job does not exist.)
+
+`curl -X POST -H "Content-Type: application/json" -d '{"jobId": 10001, "amount": "786"}' http://localhost:3001/bids`
+
 ## License
 
 This project is licensed under the MIT License.
