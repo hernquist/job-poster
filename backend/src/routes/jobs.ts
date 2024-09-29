@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
-import { addJob, getJobs, getJob, getBids } from '../database';
+import { addJob, getJobs, getJob, getBidsByJobId } from '../database';
+import { IJob } from '../database/types';
 
 const router = express.Router();
 
@@ -33,7 +34,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 // API route to get bids by a job id
 router.get('/:id/bids', async (req: Request, res: Response) => {
   const { id } = req.params;
-  getBids(parseInt(id), (err: { message: any; }, bids: any) => {
+  getBidsByJobId(parseInt(id), (err: { message: any; }, bids: any) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
@@ -44,13 +45,13 @@ router.get('/:id/bids', async (req: Request, res: Response) => {
 
 // API route to add a job
 router.post('', (req: Request, res: Response) => {
-  const { description, requirements, name, email, phone, expiration } = req.body;
+  const { title, description, requirements, name, email, phone, expiration }: IJob = req.body;
   if (typeof name === "undefined") {
-    res.status(400).json({ error: 'Please provide a name' });
+    res.status(400).json({ error: 'Please provide a job poster name' });
     return;
   }
 
-  addJob({ description, requirements, name, email, phone, expiration }, (err: { message: any; }) => {
+  addJob({ title, description, requirements, name, email, phone, expiration }, (err: { message: any; }) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
