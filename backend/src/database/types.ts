@@ -7,3 +7,7 @@ export interface IJob {
     phone: string, 
     expiration: string
 };
+
+export interface IJobDB extends IJob {
+    timeCreated: string
+}
