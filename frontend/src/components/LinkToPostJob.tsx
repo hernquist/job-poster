@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
+
 export function LinkToPostJob( ) {
     return (
-        <div></div>
+        <Link to="/post-job">CLICK HERE TO POST A NEW JOB!</Link>
     )
 }
