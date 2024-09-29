@@ -50,8 +50,10 @@ router.post('', (req: Request, res: Response) => {
     res.status(400).json({ error: 'Please provide a job poster name' });
     return;
   }
+  
+  const timeCreated = new Date().toISOString();
 
-  addJob({ title, description, requirements, name, email, phone, expiration }, (err: { message: any; }) => {
+  addJob({ title, description, requirements, name, email, phone, expiration, timeCreated }, (err: { message: any; }) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
