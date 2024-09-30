@@ -21,4 +21,8 @@ function getLowestBid(bids: IBid[] = []) {
     return ""
   }
 
-export { jobDataFunctionMap, getLowestBid };
+function getJobId (pathname: string) {
+    return pathname.split('/')[2]
+}
+
+export { jobDataFunctionMap, getLowestBid, getJobId };
