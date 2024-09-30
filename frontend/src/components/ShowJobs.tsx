@@ -1,10 +1,24 @@
 import useSWR from "swr";
+import { useLocation } from 'react-router-dom';
 import JobList from "./JobList";
-import { sortMostRecent } from "./utils";
+import { jobDataFunctionMap } from "./utils";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const styles = `
+.show-jobs-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    max-width: 300px;
+}
 
-export function ShowJobs() {
+h5 {
+  margin: 0 auto 12px; 
+}`;
+
+export function ShowJobs({title}: {title: string}) {
+    const { pathname} = useLocation();
 
     const {
       data: jobs,
@@ -12,14 +26,18 @@ export function ShowJobs() {
       isValidating,
     } = useSWR('http://localhost:3001/jobs', fetcher);
   
+    const jobDataSortingFunction = jobDataFunctionMap[pathname as keyof typeof jobDataFunctionMap];
+    
     // Handles error and loading state
     if (error) return <div className='failed'>failed to load</div>;
-    if (isValidating) return <div className="Loading">Loading...</div>;
-
+    if (isValidating || !pathname) return <div className="Loading">Loading...</div>;
   return (
-    <div>
-      <h5>5 most recent jobs</h5>
-      <JobList jobs={jobs.sort(sortMostRecent).slice(0,5)} />
+    <>
+    <style dangerouslySetInnerHTML={{__html: styles}} />
+    <div className="show-jobs-container">
+      <h5>{title}</h5>
+      <JobList jobs={jobs.sort(jobDataSortingFunction).slice(0,5)} />
     </div>
+    </>
   );
 }
