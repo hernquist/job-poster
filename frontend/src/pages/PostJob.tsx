@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function PostJob() {
@@ -30,6 +30,8 @@ function PostJob() {
         });
       
         const result = await response.json();
+
+         // navigate to the home "job" page
         if (result.message) {
             setMessage(result.message);
             setTimeout(() => {
@@ -40,10 +42,10 @@ function PostJob() {
 
     if (message) {
         return (
-            <div>
-                <h1>Success</h1>
+            <>
+                <h1>Success!</h1>
                 <p>{message}</p>
-            </div>
+            </>
         );
     }
 
