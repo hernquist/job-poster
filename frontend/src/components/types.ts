@@ -1,3 +1,11 @@
+export interface IBid {
+    id: number,
+    job_id: number,
+    amount: string,
+    timeCreated: string,
+    user_id: string
+};
+
 export interface IJob { 
     id: number,
     title: string, 
@@ -8,4 +16,5 @@ export interface IJob {
     phone: string, 
     expiration: string,
     timeCreated: string
+    bids?: IBid[]
 };
