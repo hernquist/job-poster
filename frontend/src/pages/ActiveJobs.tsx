@@ -1,13 +1,13 @@
 import { LinkToPostJob } from '../components/LinkToPostJob';
 import { ShowJobs } from '../components/ShowJobs';
 
-function Home() {
+function ActiveJobs() {
   return (
-    <div>
-      <ShowJobs title="5 Most Recent Jobs"/>
+    <>
+      <ShowJobs title="Show Most Active Job" />
       <LinkToPostJob />
-    </div>
+    </>
   );
 }
 
-export default Home;
+export default ActiveJobs;
