@@ -1,6 +1,65 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const styles = `
+h1 {
+    text-align: center;
+    font-size: 2em;
+}
+
+input[type=text], input[type=email], input[type=phone] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=phone]:focus {
+    background-color: lightblue;
+    border: 3px solid #555;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
+
+textarea:focus {
+    background-color: lightblue;
+    border: 3px solid #555;
+}
+    
+button[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    
+button[type=submit]:hover {
+    background-color: #45a049;
+}
+    
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 6px;
+}
+`
+
 function PostJob() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -50,70 +109,80 @@ function PostJob() {
     }
 
     return (
-        <div>
-            <h1>Post a Job</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="title">Job Title:</label>
-                    <input
-                        type="text"
-                        id="title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="description">Job Description:</label>
-                    <textarea
-                        id="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="requirements">Job Requirements:</label>
-                    <textarea
-                        id="requirements"
-                        value={requirements}
-                        onChange={(e) => setRequirements(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="expiration">Job Expiration:</label>
-                    <input
-                      id="expiration"
-                      value={expiration}
-                      onChange={(e) => setExpiration(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="name">Job Posted By:</label>
-                    <input
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="phone">Phone:</label>
-                    <input
-                      id="phone"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
-                </div>
+        <>
+            <style dangerouslySetInnerHTML={{ __html: styles }} />
+            <div>
+                <h1>Post a Job</h1>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="title">Job Title:</label>
+                        <input
+                            type="text"
+                            id="title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            />
+                    </div>
+                    <div>
+                        <label htmlFor="description">Job Description:</label>
+                        <textarea
+                            id="description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            />
+                    </div>
+                    <div>
+                        <label htmlFor="requirements">Job Requirements:</label>
+                        <textarea
+                            id="requirements"
+                            value={requirements}
+                            onChange={(e) => setRequirements(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="expiration">Job Expiration:</label>
+                        <input
+                            id="expiration"
+                            type="text"
+                            value={expiration}
+                            onChange={(e) => setExpiration(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="name">Job Posted By:</label>
+                        <input
+                            id="name"
+                            placeholder="Job poster's name.."
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="email">Email:</label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="Job poster's email.."
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="phone">Phone:</label>
+                        <input
+                            id="phone"
+                            type="phone"
+                            placeholder="Job poster's phone.."
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </div>
 
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </>
     );
 }
 
