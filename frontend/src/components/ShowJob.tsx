@@ -35,7 +35,7 @@ const styles = `
     padding: 2px;
 `;
 
-export default function ShowJob({ job }: { job: IJob }) {
+export default function ShowJob({ job, hidePostBid = false }: { job: IJob, hidePostBid?: boolean }) {
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: styles }} />
@@ -49,7 +49,9 @@ export default function ShowJob({ job }: { job: IJob }) {
           <p className="job-card__text">{job?.bids?.length ? `# of bids: ${job?.bids?.length}` : `no bids`}</p> 
           <p className="job-card__text">{getLowestBid(job.bids)}</p>
         </div>
-        <Link to={`/job/${job.id}`}>Make A Bid</Link> 
+        {!hidePostBid && 
+          <Link to={`/job/${job.id}`} state={{job}}>Make A Bid</Link>
+        }
       </div>
     </>
   );
