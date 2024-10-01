@@ -1,5 +1,5 @@
 
-import {getJobId, getLowestBid} from './utils';
+import { getJobId, getLowestBid } from './utils';
 
 const mockBids= [{
     amount: 80,
