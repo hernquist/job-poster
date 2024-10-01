@@ -3,7 +3,7 @@ import { IJob } from "./types";
 
 const styles = `
 .job-list {
-    max-width: 300px;
+    max-width: 360;
 }`;
 
 export default function JobList({ jobs }: { jobs: IJob[] }) {

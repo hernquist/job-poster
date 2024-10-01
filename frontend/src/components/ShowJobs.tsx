@@ -9,11 +9,14 @@ const styles = `
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    max-width: 300px;
+    max-width: 400px;
 }
 
 h5 {
-  margin: 0 auto 12px; 
+    font-size: 1.5em;
+    text-align: center; 
+    margin-top: 0;
+    margin-bottom: 10px;
 }`;
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
