@@ -1,7 +1,7 @@
 import useSWR from "swr";
-import { useLocation } from 'react-router-dom';
 import JobList from "./JobList";
 import { jobDataFunctionMap } from "./utils";
+import { JobSort } from "./types";
 
 const styles = `
 .show-jobs-container {
@@ -18,8 +18,7 @@ h5 {
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export function ShowJobs({title}: {title: string}) {
-  const { pathname} = useLocation();
+export function ShowJobs({title, sort}: {title: string, sort: JobSort}) {
 
   const {
     data: jobs,
@@ -29,9 +28,9 @@ export function ShowJobs({title}: {title: string}) {
 
   // Handles error and loading state
   if (error) return <div className='failed'>failed to load</div>;
-  if (isValidating || !pathname) return <div className="Loading">Loading...</div>;
+  if (isValidating) return <div className="Loading">Loading...</div>;
 
-  const jobDataSortingFunction = jobDataFunctionMap[pathname as keyof typeof jobDataFunctionMap];
+  const jobDataSortingFunction = jobDataFunctionMap[sort];
   
   return (
     <>
