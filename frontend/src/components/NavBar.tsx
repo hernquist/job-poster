@@ -26,9 +26,9 @@ li a {
 }
 
 li a:hover {
-  background-color: #555;
-  color: white;
-}`
+    background-color: #555;
+    color: white;
+}`;
 
 function NavBar () {
     return (
@@ -38,12 +38,7 @@ function NavBar () {
                 <ul>
                     <li>
                         <NavLink to={RoutingConfig.home}  >
-                            Most Recent Jobs
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to={RoutingConfig.activeJobs}  >
-                            Most Active Jobs
+                            Jobs Home
                         </NavLink>
                     </li>
                     <li>
