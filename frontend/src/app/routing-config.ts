@@ -3,6 +3,7 @@ export enum RoutingConfig {
     about = "/about",
     postJob = "/post-job",
     activeJobs = "/active-jobs",
-    makeABid = "/job/:jobId"
+    makeABid = "/job/:jobId/bid",
+    jobDetail = "/job/:jobId"
 }
 
