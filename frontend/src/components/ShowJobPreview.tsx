@@ -11,8 +11,8 @@ const styles = `
     border-radius: 6px;
     border: 1px solid #000;
     padding: 6px;
-    margin: 10px;
-    font-size: 1.2em;
+    margin: 10px 0;
+    font-size: 1em;
     font-family: Arial, sans-serif;
     background-color: peachpuff;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -38,7 +38,8 @@ const styles = `
 
 .job-card__text {
     margin: 2px;
-    padding: 2px;
+    padding: 4px;
+    font-size: 1.2em;
 }
 
 .job-card__link {

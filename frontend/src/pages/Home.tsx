@@ -24,8 +24,8 @@ function Home() {
           <ShowJobs title="5 Most Recent Jobs" sort={JobSort.MostRecent}/>
           <LinkToPostJob />
         </div>
-        <div className="show-jobs-layout__coolumn">
-          <ShowJobs title="Show Most Active Job" sort={JobSort.MostActive} />
+        <div className="show-jobs-layout__column">
+          <ShowJobs title="Show Most Active Jobs" sort={JobSort.MostActive} />
           <LinkToPostJob />
         </div>
       </div>
