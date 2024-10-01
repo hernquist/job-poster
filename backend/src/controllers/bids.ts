@@ -20,8 +20,10 @@ const controller = {
                 return
             } 
         })
+
+        const timeCreated = new Date().toISOString();
     
-        addBid(jobId, amount, (err: { message: any; }) => {
+        addBid(jobId, amount, timeCreated, (err: { message: any; }) => {
             if (err) {
             res.status(500).json({ error: err.message });
             return;

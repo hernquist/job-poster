@@ -18,3 +18,8 @@ export interface IJob {
     timeCreated: string
     bids?: IBid[]
 };
+
+export enum JobSort {
+    "MostRecent" = "sortMostRecent",
+    "MostActive" = "sortMostActive"
+  }

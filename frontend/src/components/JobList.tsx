@@ -1,4 +1,4 @@
-import ShowJob from "./ShowJob";
+import ShowJobPreview from "./ShowJobPreview";
 import { IJob } from "./types";
 
 const styles = `
@@ -12,7 +12,7 @@ export default function JobList({ jobs }: { jobs: IJob[] }) {
             <style dangerouslySetInnerHTML={{__html: styles }} />
             <div className="job-list">
                 {jobs.map((job) => (
-                    <ShowJob key={job.id} job={job} />
+                    <ShowJobPreview key={job.id} job={job} />
                 ))}
             </div>
         </>

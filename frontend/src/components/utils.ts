@@ -1,4 +1,4 @@
-import { IJob, IBid } from "./types";
+import { IJob, IBid, JobSort } from "./types";
 
 function sortMostRecent(a: IJob, b: IJob) {
     return Number(new Date(b.timeCreated)) - Number(new Date(a.timeCreated))
@@ -9,8 +9,8 @@ function sortMostActive(a: IJob, b: IJob) {
 }
 
 const jobDataFunctionMap = {
-    "/": sortMostRecent,
-    "/active-jobs": sortMostActive,
+    [JobSort.MostRecent]: sortMostRecent,
+    [JobSort.MostActive]: sortMostActive,
 }
 
 function getLowestBid(bids: IBid[] = []) {
@@ -21,4 +21,8 @@ function getLowestBid(bids: IBid[] = []) {
     return ""
   }
 
-export { jobDataFunctionMap, getLowestBid };
+function getJobId (pathname: string) {
+    return pathname.split('/')[2]
+}
+
+export { jobDataFunctionMap, getLowestBid, getJobId };
