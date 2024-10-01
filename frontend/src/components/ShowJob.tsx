@@ -56,6 +56,11 @@ const styles = `
 `;
 
 export default function ShowJob({ job, hidePostBid = false }: { job: IJob, hidePostBid?: boolean }) {
+  const expiration = job.expiration ? new Date (job.expiration).toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+}) : "No expiration date given"; 
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: styles }} />
@@ -63,7 +68,7 @@ export default function ShowJob({ job, hidePostBid = false }: { job: IJob, hideP
         <h4 className="job-card__title">{job.title}</h4>
         <p className="job-card__text">{job.description}</p>
         <p className="job-card__text">Requirements: {job.requirements}</p>
-        <p className="job-card__text">Job exprires: ${job.expiration}</p>
+        <p className="job-card__text">Job expires: {expiration}</p>
         <p className="job-card__text">Post By: {job.name}</p>
         <p className="job-card__text">Phone: {job.phone}</p>
         <p className="job-card__text">Email: {job.email}</p>
