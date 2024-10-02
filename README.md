@@ -15,7 +15,7 @@
 4. Visit the backend at `http://localhost:3001/`. 
 
 ### Updates to docker
-I spent some time updating the docker files so that I could use docker compose watch. The trick here for dev-ing in the backend is that I didn't want to rebuild the docker container upon dev changes. I created a hot reloading experience with logging. I assigned two actions to the `watch` command. There is a `sync` and `rebuild` action. With `docker-compose watch` running, an engineer can see the updates as he/she makes changes. Try going to a file, say `backend/src/controllers/jobs.ts` and break the code. You will see the error message in the code. Fix the error, the code will sync and rebuild.
+I spent some time updating the docker files so that I could use `docker compose watch`. The trick here for dev-ing in the backend is that I didn't want to rebuild the docker container upon dev changes. I created a hot reloading experience with logging. I assigned two actions to the `watch` command. There is a `sync` and `rebuild` action. With `docker-compose watch` running, an engineer can see the updates as he/she makes changes. Try going to a file, say `backend/src/controllers/jobs.ts` and break the code. You will see the error message in the code. Fix the error, the code will sync and rebuild.
 
 ### Backend Rest API
 
@@ -51,12 +51,12 @@ Jobs and Bids
 
 ### SQLite
 I wrote raw schema query to access the sqlite database. 
-Returning bids by job was a little tricky. SQLite does not have a method for assembling related table data into an array. So I wrote some custom javascript to assemble bids into a list. `getBidsFromJobs` and `applyBidsToJobs` do that heavy lifting. I thought it was appropriate to unit test that work. As I mentioned in `Next Steps`, I would incorporate knex and bookshelf to help write queries and help transform data. No reason to write custom code for problems that have been solved repeatedly over time. 
+Returning bids by job was a little tricky. SQLite does not have a method for assembling related table data into an array. So I wrote some custom javascript to assemble bids into a list. `getBidsFromJobs` and `applyBidsToJobs` do that heavy lifting. I thought it was appropriate to unit test that work. As I mentioned in `Next Steps`, I would incorporate `[knex.js]|(https://knexjs.org/guide/query-builder.html#knex)` and `[bookshelf]|(https://bookshelfjs.org/)` to help write queries and help transform data. No reason to write custom code for problems that have been solved repeatedly over time. 
 
-I facilitate development I seeded the database with users, jobs, and bids. `backend/src/database/seeds.ts`
+To facilitate development, I seeded the database with users, jobs, and bids. `backend/src/database/seeds.ts`
 
 ### Frontend routing
-I used `react-router-dom` to allow some dynamic routes. The config can indexes all frontend routes.
+I used `react-router-dom` to allow some dynamic routes. The Routing Config indexes all frontend routes.
 
 ```
 export enum RoutingConfig {
@@ -69,7 +69,7 @@ export enum RoutingConfig {
 }
 ```
 
-For clarity and simplicity all the routes are defined in the `Router.tsx` file
+For clarity and simplicity all the routes are defined in the `Router.tsx` file. See the re-use of the enum config here and in the NavBar and other components.
 
 ```
  <Routes>
@@ -84,7 +84,7 @@ For clarity and simplicity all the routes are defined in the `Router.tsx` file
 
 "/active-jobs" is not used but it is there nonetheless.
 
-I did not feel like this app needed redux or some other comprehensive state management system so occasionally I passed state via routing props. It can pulled from the child parent by using `useLocation`.
+I did not feel like this app needed redux or some other comprehensive state management system so occasionally I passed state via routing props. It can pulled from the child parent by using `useLocation`. This assumes that a previous page will be able to provide props to the current page. This might create difficult situations... If it does, that is when a state management system makes sense. 
 
 ### Backend testing
 I had to add
@@ -101,9 +101,9 @@ The frontend was set up for testing. I did build a `ErrorBoundary` component to 
 `npm run test`
 
 ### Error handling
-I used standard error handling aruond the responses and requests in the backend. I modified docker to help capture and log those errors.
+I used standard error handling around the responses and requests in the backend. I modified docker to help capture and log those errors.
 
-And the frontend I wrote some simple error handling around fetching of data in the react components.
+And in the frontend I wrote some simple error handling around fetching of data in the react components.
 
 -------------------------------------------------------------------
 
