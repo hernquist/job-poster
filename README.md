@@ -1,4 +1,106 @@
+# Documentation
+
+## Next steps
+1. Settle upon css
+2. Incorporate a query builder and ORM (knex and bookshelf come to mind here) -- use models to build out the ideas in the backend
+3. Better testing and finer control of backend typing
+
+## Getting started
+
+1. Open two terminal tabs.
+2. From the the root directory run
+    `docker-compose up`
+    `docker-compose watch` see below for details
+3. Visit the frontend at `http://localhost:8080/`. I seeded the sqlite database with some starting data for users, jobs, and bids. 
+4. Visit the backend at `http://localhost:3001/`. 
+
+### Updates to docker
+I spent some time updating the docker files so that I could use docker compose watch. The trick here for dev-ing in the backend is that I didn't want to rebuild the docker container upon dev changes. I created a hot reloading experience with logging. I assigned two actions to the `watch` command. There is a `sync` and `rebuild` action. With `docker-compose watch` running, an engineer can see the updates as he/she makes changes. Try going to a file, say `backend/src/controllers/jobs.ts` and break the code. You will see the error message in the code. Fix the error, the code will sync and rebuild.
+
+### Backend Rest API
+
+Users
+- `GET /api/users`: Get all users
+- `POST /api/users`: Add a user
+- `DELETE /api/users/:id`: Delete a user by id
+
+Jobs and Bids
+- `POST /api/jobs`: Create a new job posting.
+- `GET /api/jobs`: Get all job postings (with optional filtering for recently posted and most active).
+- `GET /api/jobs/:id`: Get details of a specific job posting.
+- `POST /api/jobs/:id/bids`: Place a new bid on a specific job.
+- `GET /api/jobs/:id/bids`: Get all bids related to a job.
+
+### Get Users
+`curl http://localhost:3001/users`
+### Add User
+`curl -X POST -H "Content-Type: application/json" -d '{"id": 2, "name": "Jane Doe"}' http://localhost:3001/users`
+### Delete User
+`curl -X DELETE http://localhost:3001/users/2`
+### Get Jobs
+`curl http://localhost:3001/jobs`
+### Get Jobs By Id
+`curl http://localhost:3001/jobs/2`
+### Get Bids By Job
+`curl http://localhost:3001/jobs/1/bids`
+### Add Bid To Job
+`curl -X POST -H "Content-Type: application/json" -d '{"amount": "786"}' http://localhost:3001/jobs/1/bids`
+(Add bid that would not work because the job does not exist.)
+`curl -X POST -H "Content-Type: application/json" -d '{"amount": "786"}' http://localhost:3001/jobs/6/bids`
+
+### sqlite
+I wrote raw schema query to access the sqlite database.
+I facilitate development I seeded the database with users, jobs, and bids. `backend/src/database/seeds.ts`
+
+### Frontend routing
+I used `react-router-dom` to allow some dynamic routes. The config can indexes all frontend routes.
+
+```
+export enum RoutingConfig {
+    home = "/",
+    about = "/about",
+    postJob = "/post-job",
+    activeJobs = "/active-jobs",
+    makeABid = "/job/:jobId/bid",
+    jobDetail = "/job/:jobId"
+}
+```
+
+For clarity and simplicity all the routes are defined in the `Router.tsx` file
+
+```
+ <Routes>
+    <Route path={RoutingConfig.home} Component={Home} />
+    <Route path={RoutingConfig.about} Component={About} />
+    <Route path={RoutingConfig.postJob} Component={PostJob} />
+    <Route path={RoutingConfig.activeJobs} Component={ActiveJobs} />
+    <Route path={RoutingConfig.makeABid} Component={PostBid} />
+    <Route path={RoutingConfig.jobDetail} Component={JobDetail} />
+</Routes>
+```
+
+"/active-jobs" is not used but it is there nonetheless.
+
+I did not feel like this app needed redux or some other comprehensive state management system so occasionally I passed state via routing props. It can pulled from the child parent by using `useLocation`.
+
+### Backend testing
+I had to add
+    - "@types/jest": "^29.5.13"
+    - "ts-node": "^10.9.2"
+    - "ts-jest": "^29.2.5"
+to get some testing set up in the backend. From `/backend` run
+
+`npm run test`
+
+### Frontend testing
+The frontend was set up for testing. Run
+
+`npm run test`
+
+-------------------------------------------------------------------
+
 # Intuit Mailchimp Fullstack Take Home Assessment - Job Marketplace
+# Previous README
 
 Welcome to the Intuit Mailchimp Fullstack Take Home Assessment! This project is a simplified job marketplace where users can post contract jobs and place bids on them. The focus is on core functionalities, allowing you to demonstrate your abilities in both frontend and backend development.
 

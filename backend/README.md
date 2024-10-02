@@ -98,11 +98,11 @@ The application will be running on `http://localhost:3001`.
 
 ### Add Bid To Job
 
-`curl -X POST -H "Content-Type: application/json" -d '{"jobId": 1, "amount": "786"}' http://localhost:3001/bids`
+`curl -X POST -H "Content-Type: application/json" -d '{"amount": "786"}' http://localhost:3001/jobs/1/bids`
 
 (Add job that would not work because the job does not exist.)
 
-`curl -X POST -H "Content-Type: application/json" -d '{"jobId": 10001, "amount": "786"}' http://localhost:3001/bids`
+`curl -X POST -H "Content-Type: application/json" -d '{"amount": "786"}' http://localhost:3001/jobs/11bids`
 
 ## License
 
