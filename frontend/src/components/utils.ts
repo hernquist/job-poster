@@ -16,7 +16,7 @@ const jobDataFunctionMap = {
 function getLowestBid(bids: IBid[] = []) {
     if (Array.isArray(bids) && bids.length > 0) {
       bids.sort((a: IBid, b: IBid) => (Number(a.amount) || 0) - (Number(b.amount) || 0));
-      return `low bid: ${bids[0]?.amount}`;
+      return `Low bid: ${bids[0]?.amount}`;
     }
     return ""
   }

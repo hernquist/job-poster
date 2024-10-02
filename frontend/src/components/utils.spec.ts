@@ -17,7 +17,7 @@ const mockBids= [{
 describe('utils', () => {
     describe("getLowestBid", () => {
         it('should return the lowest bid', () => {
-            expect(getLowestBid(mockBids)).toBe('low bid: 80');
+            expect(getLowestBid(mockBids)).toBe('Low bid: 80');
         });
 
         it('should return an empty string if no bids', () => {

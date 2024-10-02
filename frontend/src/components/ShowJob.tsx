@@ -80,7 +80,7 @@ export default function ShowJob({ job, hidePostBid = false }: { job: IJob, hideP
         <p className="job-card__text">Date Posted: {new Date(job.timeCreated).toDateString()}</p>
         <div className="job-card__bids-container">
           <p className="job-card__text">{job?.bids?.length ? `# of bids: ${job?.bids?.length}` : `no bids`}</p> 
-          <p className="job-card__text">Lowest bid: {getLowestBid(job.bids)}</p>
+          <p className="job-card__text">{getLowestBid(job.bids)}</p>
           <p className="job-card__text">Time left to bid: {timeLeftToBid}</p>
         </div>
         {!hidePostBid && 
