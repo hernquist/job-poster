@@ -51,7 +51,7 @@ Jobs and Bids
 
 ### SQLite
 I wrote raw schema query to access the sqlite database. 
-Returning bids by job was a little tricky. SQLite does not have a method for assembling related table data into an array. So I wrote some custom javascript to assemble bids into a list. `getBidsFromJobs` and `applyBidsToJobs` do that heavy lifting. I thought it was appropriate to unit test that work. As I mentioned in `Next Steps`, I would incorporate `[knex.js]|(https://knexjs.org/guide/query-builder.html#knex)` and `[bookshelf]|(https://bookshelfjs.org/)` to help write queries and help transform data. No reason to write custom code for problems that have been solved repeatedly over time. 
+Returning bids by job was a little tricky. SQLite does not have a method for assembling related table data into an array. So I wrote some custom javascript to assemble bids into a list. `getBidsFromJobs` and `applyBidsToJobs` do that heavy lifting. I thought it was appropriate to unit test that work. As I mentioned in `Next Steps`, I would incorporate `[knex.js](https://knexjs.org/guide/query-builder.html#knex)` and `[bookshelf](https://bookshelfjs.org/)` to help write queries and help transform data. No reason to write custom code for problems that have been solved repeatedly over time. 
 
 To facilitate development, I seeded the database with users, jobs, and bids. `backend/src/database/seeds.ts`
 
