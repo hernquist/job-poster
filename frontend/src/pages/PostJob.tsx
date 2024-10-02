@@ -7,6 +7,11 @@ h1 {
     font-size: 2em;
 }
 
+p {
+    text-align: center;
+    font-size: 1.2em;
+}
+
 input[type=text], input[type=email], input[type=phone] {
     width: 100%;
     padding: 12px 20px;
@@ -102,6 +107,7 @@ function PostJob() {
     if (message) {
         return (
             <>
+            <style dangerouslySetInnerHTML={{ __html: styles }} />
                 <h1>Success!</h1>
                 <p>{message}</p>
             </>
@@ -127,6 +133,7 @@ function PostJob() {
                         <label htmlFor="description">Job Description:</label>
                         <textarea
                             id="description"
+                            placeholder="Job description.."
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             />
@@ -135,15 +142,17 @@ function PostJob() {
                         <label htmlFor="requirements">Job Requirements:</label>
                         <textarea
                             id="requirements"
+                            placeholder="2 years experience, etc.."
                             value={requirements}
                             onChange={(e) => setRequirements(e.target.value)}
                         />
                     </div>
                     <div>
-                        <label htmlFor="expiration">Job Expiration:</label>
+                        <label htmlFor="expiration">Job Expiration: </label>
                         <input
                             id="expiration"
-                            type="text"
+                            placeholder='MM/DD/YYYY...'
+                            type="date"
                             value={expiration}
                             onChange={(e) => setExpiration(e.target.value)}
                         />

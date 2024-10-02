@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import NavBar from "../components/NavBar";
+import ErrorBoundary from "./ErrorBoundry";
 import Router from "./Router";
 
 const styles = `
@@ -13,11 +14,13 @@ const styles = `
 
 function App() {
   return (
-    <>
-      <style  dangerouslySetInnerHTML={{__html: styles }} />
-      <NavBar/>
-      <Router />
-    </>
+    <div>
+      <style dangerouslySetInnerHTML={{__html: styles }} />
+      <ErrorBoundary>
+        <NavBar/>
+        <Router />
+      </ErrorBoundary>
+    </div>
   );
 }
 

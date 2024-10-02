@@ -56,6 +56,16 @@ const styles = `
 `;
 
 export default function ShowJob({ job, hidePostBid = false }: { job: IJob, hidePostBid?: boolean }) {
+  const expiration = job.expiration ? new Date (job.expiration).toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+}) : "No expiration date given"; 
+  const now = new Date();
+  const expirationDate = new Date(job.expiration);
+  const diff = expirationDate.getDate() - now.getDate();
+  const timeLeftToBid = job.expiration ? `${diff} ${diff === 1 ? 'day' : 'days'}` : "";
+
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: styles }} />
@@ -63,7 +73,7 @@ export default function ShowJob({ job, hidePostBid = false }: { job: IJob, hideP
         <h4 className="job-card__title">{job.title}</h4>
         <p className="job-card__text">{job.description}</p>
         <p className="job-card__text">Requirements: {job.requirements}</p>
-        <p className="job-card__text">Job exprires: ${job.expiration}</p>
+        <p className="job-card__text">Job expires: {expiration}</p>
         <p className="job-card__text">Post By: {job.name}</p>
         <p className="job-card__text">Phone: {job.phone}</p>
         <p className="job-card__text">Email: {job.email}</p>
@@ -71,6 +81,7 @@ export default function ShowJob({ job, hidePostBid = false }: { job: IJob, hideP
         <div className="job-card__bids-container">
           <p className="job-card__text">{job?.bids?.length ? `# of bids: ${job?.bids?.length}` : `no bids`}</p> 
           <p className="job-card__text">{getLowestBid(job.bids)}</p>
+          <p className="job-card__text">Time left to bid: {timeLeftToBid}</p>
         </div>
         {!hidePostBid && 
           <Link className="job-card__link" to={`/job/${job.id}/bid`} state={{job}}>Make A Bid</Link>

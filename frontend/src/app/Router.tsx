@@ -7,7 +7,7 @@ import PostBid from '../pages/PostBid';
 import JobDetail from '../pages/JobDetail';
 import { RoutingConfig } from './routing-config';
 
-export function App() {
+export function Router() {
 
   return (
     <div>
@@ -23,4 +23,4 @@ export function App() {
   );
 }
 
-export default App;
+export default Router;

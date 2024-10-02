@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "tsc",
     "dev": "npm run build && npm run start",
     "watch": "nodemon --watch src -ext ts --exec \"npm run dev\" --signal SIGTERM",
@@ -21,10 +21,14 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.13",
     "@types/node": "^22.5.5",
     "@types/sqlite3": "^3.1.11",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.5",
+    "ts-jest": "^29.2.5",
     "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   }
 }
