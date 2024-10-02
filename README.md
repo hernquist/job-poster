@@ -45,11 +45,14 @@ Jobs and Bids
 `curl http://localhost:3001/jobs/1/bids`
 ### Add Bid To Job
 `curl -X POST -H "Content-Type: application/json" -d '{"amount": "786"}' http://localhost:3001/jobs/1/bids`
+
 (Add bid that would not work because the job does not exist.)
 `curl -X POST -H "Content-Type: application/json" -d '{"amount": "786"}' http://localhost:3001/jobs/6/bids`
 
-### sqlite
-I wrote raw schema query to access the sqlite database.
+### SQLite
+I wrote raw schema query to access the sqlite database. 
+Returning bids by job was a little tricky. SQLite does not have a method for assembling related table data into an array. So I wrote some custom javascript to assemble bids into a list. `getBidsFromJobs` and `applyBidsToJobs` do that heavy lifting. I thought it was appropriate to unit test that work. As I mentioned in `Next Steps`, I would incorporate knex and bookshelf to help write queries and help transform data. No reason to write custom code for problems that have been solved repeatedly over time. 
+
 I facilitate development I seeded the database with users, jobs, and bids. `backend/src/database/seeds.ts`
 
 ### Frontend routing
@@ -93,9 +96,14 @@ to get some testing set up in the backend. From `/backend` run
 `npm run test`
 
 ### Frontend testing
-The frontend was set up for testing. Run
+The frontend was set up for testing. I did build a `ErrorBoundary` component to help allow targeted unit tests. Run
 
 `npm run test`
+
+### Error handling
+I used standard error handling aruond the responses and requests in the backend. I modified docker to help capture and log those errors.
+
+And the frontend I wrote some simple error handling around fetching of data in the react components.
 
 -------------------------------------------------------------------
 
