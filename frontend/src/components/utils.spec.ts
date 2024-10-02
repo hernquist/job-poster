@@ -1,18 +1,20 @@
 
 import { getJobId, getLowestBid } from './utils';
 
-const mockBids= [{
-    amount: 80,
-    id: 6,
-    timeCreated: "2024-10-01T12:16:52.721Z",
-    userId: 1
+const mockBids= [
+    {
+        amount: 80,
+        id: 6,
+        timeCreated: "2024-10-01T12:16:52.721Z",
+        userId: 1
     },
     {
-    amount: 90,
-    id: 7,
-    timeCreated: "2024-10-01T12:17:22.721Z",
-    userId: 1
-}]
+        amount: 90,
+        id: 7,
+        timeCreated: "2024-10-01T12:17:22.721Z",
+        userId: 1
+    }
+];
 
 describe('utils', () => {
     describe("getLowestBid", () => {
