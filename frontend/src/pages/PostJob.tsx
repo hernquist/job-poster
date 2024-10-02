@@ -148,7 +148,7 @@ function PostJob() {
                         />
                     </div>
                     <div>
-                        <label htmlFor="expiration">Job Expiration:</label>
+                        <label htmlFor="expiration">Job Expiration: </label>
                         <input
                             id="expiration"
                             placeholder='MM/DD/YYYY...'
