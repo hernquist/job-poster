@@ -38,7 +38,7 @@ export function getJobs(callback: any) {
     db.all(query, [], callback)
 }
 
-export function getJob(id: number, callback: any) {
+export function getJob(id: string, callback: any) {
     const query = 'SELECT * FROM jobs WHERE id = ?';
     db.all(query, [id], callback)
 }
@@ -56,7 +56,7 @@ export function getBidsByJobId(jobId: number, callback: any) {
     db.all(query, [jobId], callback)
 }
 
-export function addBid(jobId: number, amount: number, timeCreated: string, callback: any) {
+export function addBid(jobId: string, amount: number, timeCreated: string, callback: any) {
     const userId = 1; // Assume the user is always 1 for now
     const query = 'INSERT INTO bids (user_id, amount, timeCreated, job_id) VALUES (?, ?, ?, ?)';
     db.run(query, [userId, amount, timeCreated, jobId], callback)

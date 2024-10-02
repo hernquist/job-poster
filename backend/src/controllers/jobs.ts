@@ -18,7 +18,7 @@ const controller = {
     },
     getJob: async (req: Request, res: Response) => {
         const { id } = req.params;
-        getJob(parseInt(id), (err: { message: any; }, job: any) => {
+        getJob(id, (err: { message: any; }, job: any) => {
             if (err) {
                 res.status(500).json({ error: err.message });
                 return;
