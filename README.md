@@ -1,7 +1,7 @@
 # Documentation
 
 ## Next steps
-1. Settle upon css
+1. Settle upon a better defined css process
 2. Incorporate a query builder and ORM (knex and bookshelf come to mind here) -- use models to build out the ideas in the backend
 3. Better testing and finer control of backend typing
 
